@@ -1,9 +1,17 @@
 from dataclasses import dataclass, field
+
 from .enums import (
-    TaskStatus, PipelineStep, ErrorKind,
-    ClaimType, EntityKind,
-    Plausibility, EvidenceStrength, Verdict,
-    SourceTrust, EvidenceRelation, AttributeSignal,
+    AttributeSignal,
+    ClaimType,
+    EntityKind,
+    ErrorKind,
+    EvidenceRelation,
+    EvidenceStrength,
+    Plausibility,
+    PipelineStep,
+    SourceTrust,
+    TaskStatus,
+    Verdict,
 )
 
 
@@ -53,7 +61,7 @@ class Source:
     snippet: str
     domain: str
     trust: SourceTrust
-    retrieved_at: int  # ms
+    retrieved_at: int
 
 
 @dataclass
@@ -61,7 +69,7 @@ class Evidence:
     source_url: str
     quote: str
     relation: EvidenceRelation
-    relevance: float  # 0..1
+    relevance: float
 
 
 # === Проверка ===
@@ -85,14 +93,14 @@ class MainCheck:
     evidence: list[Evidence] = field(default_factory=list)
     attributes_checked: bool = False
     attribute_checks: list[AttributeCheck] = field(default_factory=list)
-    confidence: float = 0.0  # 0..1
+    confidence: float = 0.0
 
 
 @dataclass
 class FactCheckResult:
     checks: list[MainCheck]
     disclaimer: str
-    checked_at: int  # ms
+    checked_at: int
 
 
 @dataclass
@@ -100,7 +108,7 @@ class CheckTask:
     id: str
     input_text: str
     status: TaskStatus
-    created_at: int  # ms
+    created_at: int
     progress: TaskProgress | None = None
     started_at: int | None = None
     finished_at: int | None = None
